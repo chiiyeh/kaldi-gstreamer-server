@@ -145,7 +145,7 @@ class DecoderPipelineTests(unittest.TestCase):
         decoder_pipeline.process_data(f.read())
         time.sleep(3)
         decoder_pipeline.cancel()
-        print "Pipeline cancelled"
+        print("Pipeline cancelled")
         
         words = []
         finished[0] = False
@@ -161,7 +161,7 @@ class DecoderPipelineTests(unittest.TestCase):
         #test cancelling without anything sent
         decoder_pipeline.init_request("test0", "audio/x-raw, layout=(string)interleaved, rate=(int)16000, format=(string)S16LE, channels=(int)1")
         decoder_pipeline.cancel()
-        print "Pipeline cancelled"
+        print("Pipeline cancelled")
         
         words = []
         finished[0] = False
