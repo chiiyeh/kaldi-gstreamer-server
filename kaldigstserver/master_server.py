@@ -91,7 +91,7 @@ def content_type_to_caps(content_type):
         attributes = default_attributes
         for (key,_,value) in [p.partition("=") for p in attr_string.split(",")]:
             attributes[key.strip()] = value.strip()
-        return "%s, %s" % (media_type, ", ".join(["%s=%s" % (key, value) for (key,value) in attributes.iteritems()]))
+        return "%s, %s" % (media_type, ", ".join(["%s=%s" % (key, value) for (key,value) in attributes.items()]))
     else:
         return content_type
 
@@ -271,7 +271,7 @@ class DecoderSocketHandler(tornado.websocket.WebSocketHandler):
         if len(event_str) > 100:
             event_str = event_str[:97] + "..."
         logging.info("%s: Sending event %s to client" % (self.id, event_str))
-        self.write_message(json.dumps(event).replace('False', 'false').replace('\'', '\"'))
+        self.write_message(json.dumps(event).replace('False', 'false'))
 
     def open(self):
         self.id = str(uuid.uuid4())
