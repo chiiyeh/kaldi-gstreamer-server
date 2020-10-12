@@ -3,18 +3,15 @@ __author__ = 'tanel'
 import argparse
 #from ws4py.client.threadedclient import WebSocketClient
 import time
-import threading
 import sys
 import urllib
 import queue
 import json
 import time
-import os
 from tornado.ioloop import IOLoop
 from tornado import gen
 from tornado.websocket import websocket_connect
 from concurrent.futures import ThreadPoolExecutor
-from tornado.concurrent import run_on_executor
 
 
 def rate_limited(maxPerSecond):
@@ -22,12 +19,12 @@ def rate_limited(maxPerSecond):
     def decorate(func):
         last_time_called = [0.0]
         def rate_limited_function(*args,**kargs):
-            elapsed = time.clock() - last_time_called[0]
+            elapsed = time.process_time() - last_time_called[0]
             left_to_wait = min_interval - elapsed
             if left_to_wait > 0:
                 yield gen.sleep(left_to_wait)
             ret = func(*args,**kargs)
-            last_time_called[0] = time.clock()
+            last_time_called[0] = time.process_time()
             return ret
         return rate_limited_function
     return decorate

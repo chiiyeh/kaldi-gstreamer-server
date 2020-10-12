@@ -6,17 +6,14 @@ import time
 import os
 import argparse
 from subprocess import Popen, PIPE
-from gi.repository import GObject
+from gi.repository import GLib
 import yaml
 import json
 import sys
-import locale
-import codecs
 import zlib
 import base64
 import time
 
-import asyncio
 from tornado.platform.asyncio import AnyThreadEventLoopPolicy
 import tornado.gen 
 import tornado.process
@@ -433,7 +430,7 @@ def main():
     else:
         decoder_pipeline = DecoderPipeline(tornado.ioloop.IOLoop.current(), conf)
 
-    gobject_loop = GObject.MainLoop()
+    gobject_loop = GLib.MainLoop()
     tornado.ioloop.IOLoop.current().run_in_executor(executor, gobject_loop.run)
     tornado.ioloop.IOLoop.current().spawn_callback(main_loop, args.uri, decoder_pipeline, post_processor, full_post_processor)
     tornado.ioloop.IOLoop.current().start()

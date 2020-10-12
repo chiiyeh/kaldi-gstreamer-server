@@ -13,8 +13,6 @@ import codecs
 import os.path
 import uuid
 import time
-import threading
-import functools
 from tornado.locks import Condition
 
 import tornado.ioloop
@@ -23,7 +21,6 @@ import tornado.web
 import tornado.websocket
 import tornado.gen
 import tornado.concurrent
-import concurrent.futures
 import settings
 import common
 
